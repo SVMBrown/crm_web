@@ -1,7 +1,11 @@
 <h1>All Contacts</h1>
-<ul>
-  <% @contacts.each do |contact| %>
-    <li><%= contact.first_name %> <%= contact.last_name %></li>
-  <% end %>
-</ul>
+<% if $rolodex.contacts.empty? %>
+  <p>You haven't added any contacts yet! <a href="/contacts/new">Add a new contact?</a></p>
+<% else %>
+  <ul>
+    <% $rolodex.contacts.each do |contact| %>
+      <li><%= contact.first_name %> <%= contact.last_name %></li>
+    <% end %>
+  </ul>
+<% end %>
 <a href="/">Home Page</a>
