@@ -1,4 +1,3 @@
-require_relative 'contact'
 require_relative 'rolodex'
 require 'sinatra'
 $rolodex = Rolodex.new
@@ -13,4 +12,9 @@ end
 
 get '/contacts/new' do
   erb :add_new_contact
+end
+
+post '/contacts' do
+  $rolodex.add_contact(params[:first_name], params[:last_name], params[:email], params[:notes])
+  redirect to('/contacts')
 end
