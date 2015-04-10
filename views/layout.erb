@@ -5,6 +5,21 @@
     <title><%= @crm_app_name ? @crm_app_name : "My Web CRM" %></title>
   </head>
   <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/contacts">View Contacts</a></li>
+          <li><a href="/contacts/new">Add a Contact</a></li>
+        </ul>
+      </nav>
+    </header>
     <%= yield %>
+    <footer>
+      <p>
+        <a href="#">Back to Top</a>
+      </p>
+    </footer>
+    <address>SVMBrown <time datetime="2015-04-10">April 10, 2015</time></address>
   </body>
 </html>
