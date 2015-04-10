@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8">
     <title><%= @crm_app_name ? @crm_app_name : "My Web CRM" %></title>
+    <link rel="stylesheet" type="text/css" href="/style.css">
   </head>
   <body>
     <header>
-      <nav>
+      <nav class="main_nav">
         <ul>
           <li><a href="/">Home</a></li>
           <li><a href="/contacts">View Contacts</a></li>
@@ -14,7 +15,9 @@
         </ul>
       </nav>
     </header>
-    <%= yield %>
+    <main>
+      <%= yield %>
+    </main>
     <footer>
       <p>
         <a href="#">Back to Top</a>
