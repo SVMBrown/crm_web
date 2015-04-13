@@ -1,9 +1,9 @@
 <h1>All Contacts</h1>
-<% if $rolodex.contacts.empty? %>
+<% if @contacts.empty? %>
   <p>You haven't added any contacts yet! <a href="/contacts/new">Add a new contact?</a></p>
 <% else %>
   <ul class="contact_list">
-    <% $rolodex.contacts.each do |contact| %>
+    <% @contacts.each do |contact| %>
       <li class="listing">
         <dl class="listing">
           <dt>Name</dt>

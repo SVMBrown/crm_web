@@ -1,8 +1,6 @@
-require_relative 'rolodex'
 require 'sinatra'
 require 'data_mapper'
 
-$rolodex = Rolodex.new
 
 DataMapper.setup(:default, "sqlite3:database.sqlite3")
 
@@ -25,6 +23,7 @@ get '/' do
 end
 
 get '/contacts' do
+  @contacts = Contact.all
   erb :view_contacts
 end
 
@@ -33,8 +32,8 @@ get '/contacts/new' do
 end
 
 get '/contacts/:id' do
-  if $rolodex.has_contact_with_id?(params[:id].to_i)
-    @contact = $rolodex.find_contact(params[:id].to_i)
+  @contact = Contact.get(params[:id])
+  if @contact
     erb :show_contact
   else
     raise Sinatra::NotFound
@@ -42,8 +41,8 @@ get '/contacts/:id' do
 end
 
 get "/contacts/:id/edit" do
-  if $rolodex.has_contact_with_id?(params[:id].to_i)
-    @contact = $rolodex.find_contact(params[:id].to_i)
+  @contact = Contact.get(params[:id])
+  if @contact
     erb :edit_contact
   else
     puts "something went wrong..."
@@ -52,8 +51,8 @@ get "/contacts/:id/edit" do
 end
 
 get '/contacts/:id/delete' do
-  if $rolodex.has_contact_with_id?(params[:id].to_i)
-    @contact = $rolodex.find_contact(params[:id].to_i)
+  @contact = Contact.get(params[:id])
+  if @contact
     erb :delete_contact
   else
     puts "something went wrong..."
@@ -62,25 +61,33 @@ get '/contacts/:id/delete' do
 end
 
 post '/contacts' do
-  $rolodex.add_contact(params[:first_name].capitalize, params[:last_name].capitalize, params[:email], params[:note])
+  Contact.create(
+    first_name: params[:first_name].capitalize,
+    last_name: params[:last_name].capitalize,
+    email: params[:email],
+    note: params[:note]
+  )
   redirect to('/contacts')
 end
 
 put '/contacts/:id' do
-  if $rolodex.has_contact_with_id?(params[:id].to_i)
-    $rolodex.modify(params[:id].to_i, 1, params[:first_name])
-    $rolodex.modify(params[:id].to_i, 2, params[:last_name])
-    $rolodex.modify(params[:id].to_i, 3, params[:email])
-    $rolodex.modify(params[:id].to_i, 4, params[:note])
-    redirect to("/contacts/#{params[:id].to_i}")
+  @contact = Contact.get(params[:id])
+  if @contact
+    @contact.first_name = params[:first_name]
+    @contact.last_name =  params[:last_name]
+    @contact.email =  params[:email]
+    @contact.note =  params[:note]
+    @contact.save
+    redirect to("/contacts/#{params[:id]}")
   else
     raise Sinatra::NotFound
   end
 end
 
 delete '/contacts/:id' do
-  if $rolodex.has_contact_with_id?(params[:id].to_i)
-    $rolodex.remove_contact(params[:id].to_i)
+  @contact = Contact.get(params[:id])
+  if @contact
+    @contact.destroy
     redirect to("/contacts")
   else
     raise Sinatra::NotFound
