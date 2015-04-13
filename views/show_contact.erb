@@ -1,0 +1,9 @@
+<dl class="listing">
+  <dt>Name</dt>
+  <dd class="full_name"><%= @contact.first_name %> <%= @contact.last_name %></dd>
+  <dt>E-Mail</dt>
+  <dd class="email"><%= @contact.email %></dd>
+  <dt>Note</dt>
+  <dd class="note"><%= @contact.note %></dd>
+</dl>
+<a href="/contacts/<%= @contact.id %>/edit" class="edit">Edit this contact</a>

@@ -12,6 +12,8 @@
           <dd class="email"><%= contact.email %></dd>
           <dt>Note</dt>
           <dd class="note"><%= contact.note %></dd>
+          <dt>View Contact</dt>
+          <dd><a href="/contacts/<%= contact.id %>">Click Here!</a></dd>
         </dl>
       </li>
     <% end %>

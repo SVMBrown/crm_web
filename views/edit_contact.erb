@@ -1,0 +1,16 @@
+<form action="/contacts/<%= @contact.id%>" method="post">
+  <dl class="listing">
+    <dt><label for="first">Name</label></dt>
+    <dd class="full_name">
+      <input type="text" name="first_name" id="first" value="<%= @contact.first_name %>">
+      <input type="text" name="last_name" id="last" value="<%= @contact.last_name %>">
+    </dd>
+    <dt><label for="email">E-Mail</label></dt>
+    <dd class="email"><input type="email" name="email" id="email" value="<%= @contact.email %>"></dd>
+    <dt><label for="note">Note</label></dt>
+    <dd class="note"><input type="text" name="note" id="note" value="<%= @contact.note %>"></dd>
+    <dt><a href="/contacts/<%= @contact.id%>/delete">Delete Contact</a></dt>
+    <dd><input type="submit" value="Save Contact"></dd>
+  </dl>
+  <input type="hidden" name="_method" value="put">
+</form>

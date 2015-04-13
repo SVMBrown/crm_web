@@ -1,0 +1,14 @@
+<form action="/contacts/<%= @contact.id%>" method="post">
+<input type="hidden" name="_method" value="delete">
+  <dl class="listing">
+    <dt>Name</dt>
+    <dd class="full_name"><%= @contact.first_name %> <%= @contact.last_name %></dd>
+    <dt>E-Mail</dt>
+    <dd class="email"><%= @contact.email %></dd>
+    <dt>Note</dt>
+    <dd class="note"><%= @contact.note %></dd>
+    <dt><label for="delete">Are you sure?</label></dt>
+    <dd><input type="submit" value="Delete Contact" id="delete"></dd>
+  </dl>
+</form>
+<a href="/">Go home!</a>
